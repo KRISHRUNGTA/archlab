@@ -897,22 +897,211 @@ table.vl .nop { display: inline-block; min-width: 40px; text-align: center; padd
 table.vl tr.vl-empty td { background: transparent; }
 table.vl tr.vl-empty .nop { opacity: .45; }
 
+/* v15: clearer, more vivid cell colours in the ILP and pipeline timelines */
+.pd-c rect { stroke-width: 1.6; }
+.pd-c text { font-weight: 700; }
+.pd-c .t2 { opacity: 1; font-weight: 600; }
+:root:not([data-theme="light"]) .hv-c rect, :root:not([data-theme="light"]) .pd-c rect { filter: none; }
+:root:not([data-theme="light"]) .pd-c text { fill: #F4F8FF; }
+:root:not([data-theme="light"]) .pd-c.s0 rect { fill: #2F6FD6; fill-opacity: .55; stroke: #6FA8FF; }
+:root:not([data-theme="light"]) .pd-c.s1 rect { fill: #1FA36A; fill-opacity: .50; stroke: #4FE0A0; }
+:root:not([data-theme="light"]) .pd-c.s2 rect { fill: #14A8B8; fill-opacity: .50; stroke: #52DCEB; }
+:root:not([data-theme="light"]) .pd-c.s3 rect { fill: #D9A21B; fill-opacity: .50; stroke: #FFD25A; }
+:root:not([data-theme="light"]) .pd-c.s4 rect { fill: #E07B22; fill-opacity: .50; stroke: #FFA55E; }
+:root:not([data-theme="light"]) .pd-c.s5 rect { fill: #E0533F; fill-opacity: .55; stroke: #FF8A78; }
+:root:not([data-theme="light"]) .pd-c.s6 rect { fill: #7DB82A; fill-opacity: .50; stroke: #B4EE5C; }
+:root:not([data-theme="light"]) .pd-c.dst rect { fill: #E8B21A; fill-opacity: .40; stroke: #FFD84D; stroke-width: 2; }
+:root:not([data-theme="light"]) .pd-c.fst rect { fill: #E8B21A; fill-opacity: .20; stroke: #FFD84D; }
+:root:not([data-theme="light"]) .pd-c.stc rect { fill: #8B5CF6; fill-opacity: .50; stroke: #B79BFF; stroke-width: 2; }
+:root:not([data-theme="light"]) .pd-c.ctl rect { fill: #F08A24; fill-opacity: .42; stroke: #FFB066; stroke-width: 2; }
+:root:not([data-theme="light"]) .pd-c.fls rect { fill: #E5484D; fill-opacity: .32; stroke: #FF7B80; }
+:root:not([data-theme="light"]) .pd-c.fls text { fill: #FFB4B7; }
+:root:not([data-theme="light"]) .pd-c.wk rect { fill: #2F6FD6; fill-opacity: .25; stroke: #6FA8FF; }
+:root:not([data-theme="light"]) .pd-c.ilh rect { fill: #8A9AB5; fill-opacity: .18; stroke: #C2CEE2; opacity: 1; }
+:root:not([data-theme="light"]) .pd-c.ilh text { opacity: 1; fill: #DCE5F3; }
+.pd-c.wt rect { fill-opacity: .42; }
+:root:not([data-theme="light"]) .pd-c.wrong { opacity: .8; }
+/* legend swatches match */
+:root:not([data-theme="light"]) .legend .sw.s0 { background: #2F6FD6; border-color: #6FA8FF; }
+:root:not([data-theme="light"]) .legend .sw.s1 { background: #1FA36A; border-color: #4FE0A0; }
+:root:not([data-theme="light"]) .legend .sw.s5 { background: #E0533F; border-color: #FF8A78; }
+:root:not([data-theme="light"]) .legend .sw.dst { background: #E8B21A; border-color: #FFD84D; }
+:root:not([data-theme="light"]) .legend .sw.stc { background: #8B5CF6; border-color: #B79BFF; }
+:root:not([data-theme="light"]) .legend .sw.ctl { background: #F08A24; border-color: #FFB066; }
+
+/* ILP schedule: clear, saturated colours per stage and per wait reason (v15) */
+#il-pdin, #il-leg {
+  --k-is: #2563EB; --k-is-s: #1D4ED8; --k-ex: #059669; --k-ex-s: #047857; --k-wb: #DC2626; --k-wb-s: #B91C1C;
+  --k-raw: #D97706; --k-raw-s: #B45309; --k-war: #7C3AED; --k-war-s: #6D28D9; --k-unit: #EA580C; --k-unit-s: #C2410C;
+  --k-ord: #64748B; --k-ord-s: #475569; --k-slot: #0891B2; --k-slot-s: #0E7490; --k-hold: #0EA5E9; --k-hold-s: #0369A1;
+  --k-fill: .34; --k-wait: .24; --k-txt: var(--ink);
+}
+:root:not([data-theme="light"]) #il-pdin, :root:not([data-theme="light"]) #il-leg {
+  --k-is: #3B82F6; --k-is-s: #93C5FD; --k-ex: #10B981; --k-ex-s: #6EE7B7; --k-wb: #F43F5E; --k-wb-s: #FDA4AF;
+  --k-raw: #F59E0B; --k-raw-s: #FCD34D; --k-war: #A78BFA; --k-war-s: #DDD6FE; --k-unit: #FB923C; --k-unit-s: #FDBA74;
+  --k-ord: #94A3B8; --k-ord-s: #CBD5E1; --k-slot: #22D3EE; --k-slot-s: #A5F3FC; --k-hold: #38BDF8; --k-hold-s: #BAE6FD;
+  --k-fill: .82; --k-wait: .5; --k-txt: #FFFFFF;
+}
+:root[data-theme="dark"] #il-pdin, :root[data-theme="dark"] #il-leg {
+  --k-is: #3B82F6; --k-is-s: #93C5FD; --k-ex: #10B981; --k-ex-s: #6EE7B7; --k-wb: #F43F5E; --k-wb-s: #FDA4AF;
+  --k-raw: #F59E0B; --k-raw-s: #FCD34D; --k-war: #A78BFA; --k-war-s: #DDD6FE; --k-unit: #FB923C; --k-unit-s: #FDBA74;
+  --k-ord: #94A3B8; --k-ord-s: #CBD5E1; --k-slot: #22D3EE; --k-slot-s: #A5F3FC; --k-hold: #38BDF8; --k-hold-s: #BAE6FD;
+  --k-fill: .82; --k-wait: .5; --k-txt: #FFFFFF;
+}
+#il-pdin .pd-c rect { filter: none; stroke-width: 1.8; }
+#il-pdin .pd-c text { fill: var(--k-txt); }
+#il-pdin .pd-c.s0 rect { fill: var(--k-is);  fill-opacity: var(--k-fill); stroke: var(--k-is-s); }
+#il-pdin .pd-c.s1 rect { fill: var(--k-ex);  fill-opacity: var(--k-fill); stroke: var(--k-ex-s); }
+#il-pdin .pd-c.s5 rect { fill: var(--k-wb);  fill-opacity: var(--k-fill); stroke: var(--k-wb-s); }
+#il-pdin .pd-c.ilh rect { fill: var(--k-hold); fill-opacity: calc(var(--k-wait) * .8); stroke: var(--k-hold-s); stroke-dasharray: 3 3; opacity: 1; }
+#il-pdin .pd-c.ilh text { fill: var(--k-txt); opacity: 1; }
+#il-pdin .pd-c.wt rect { stroke-dasharray: 4 3; stroke-width: 1.8; }
+#il-pdin .pd-c.dst rect { fill: var(--k-raw);  fill-opacity: var(--k-wait); stroke: var(--k-raw-s); }
+#il-pdin .pd-c.stc rect { fill: var(--k-war);  fill-opacity: var(--k-wait); stroke: var(--k-war-s); }
+#il-pdin .pd-c.ctl rect { fill: var(--k-unit); fill-opacity: var(--k-wait); stroke: var(--k-unit-s); }
+#il-pdin .pd-c.fst rect { fill: var(--k-ord);  fill-opacity: calc(var(--k-wait) * .6); stroke: var(--k-ord-s); }
+#il-pdin .pd-c.wk  rect { fill: var(--k-slot); fill-opacity: var(--k-wait); stroke: var(--k-slot-s); }
+#il-pdin .pd-c.dst text { fill: var(--k-txt); } 
+:root:not([data-theme="light"]) #il-pdin .pd-c.dst text { fill: #FFE9A8; }
+:root:not([data-theme="light"]) #il-pdin .pd-c.stc text { fill: #EDE9FE; }
+:root:not([data-theme="light"]) #il-pdin .pd-c.wk text { fill: #CFFAFE; }
+:root:not([data-theme="light"]) #il-pdin .pd-c.fst text { fill: #E2E8F0; }
+:root:not([data-theme="light"]) #il-pdin .pd-c.ctl text { fill: #FFE4CC; }
+#il-pdin .pd-c.wt .t1 { font-weight: 800; letter-spacing: .02em; } #il-pdin .pd-c.wt .t2 { opacity: 1; }
+#il-pdin .il-tick { stroke: var(--k-ex-s); opacity: .6; }
+/* arrows */
+#il-pdin .pd-fw { stroke: var(--k-is-s); stroke-width: 2.4; } #il-pdin .pd-fw:not(.bind) { opacity: .85; stroke-width: 2; }
+#il-pdin .pd-fs { stroke: var(--k-war-s); stroke-width: 2.2; }
+#il-pdin .ah-f { fill: var(--k-is-s); } #il-pdin .ah-p { fill: var(--k-war-s); }
+/* legend swatches */
+#il-leg .lg { width: 18px; height: 13px; border-radius: 4px; border: 1.8px solid; opacity: 1; }
+#il-leg .lg.s0 { background: color-mix(in srgb, var(--k-is) calc(var(--k-fill) * 100%), transparent); border-color: var(--k-is-s); border-style: solid; }
+#il-leg .lg.s1 { background: color-mix(in srgb, var(--k-ex) calc(var(--k-fill) * 100%), transparent); border-color: var(--k-ex-s); border-style: solid; }
+#il-leg .lg.s5 { background: color-mix(in srgb, var(--k-wb) calc(var(--k-fill) * 100%), transparent); border-color: var(--k-wb-s); border-style: solid; }
+#il-leg .lg.ilh { background: color-mix(in srgb, var(--k-hold) calc(var(--k-wait) * 80%), transparent); border-color: var(--k-hold-s); border-style: dashed; }
+#il-leg .lg.dst { background: color-mix(in srgb, var(--k-raw) calc(var(--k-wait) * 100%), transparent); border-color: var(--k-raw-s); border-style: dashed; }
+#il-leg .lg.stc { background: color-mix(in srgb, var(--k-war) calc(var(--k-wait) * 100%), transparent); border-color: var(--k-war-s); border-style: dashed; }
+#il-leg .lg.ctl { background: color-mix(in srgb, var(--k-unit) calc(var(--k-wait) * 100%), transparent); border-color: var(--k-unit-s); border-style: dashed; }
+#il-leg .lg.fst { background: color-mix(in srgb, var(--k-ord) calc(var(--k-wait) * 60%), transparent); border-color: var(--k-ord-s); border-style: dashed; }
+#il-leg .lg.wk  { background: color-mix(in srgb, var(--k-slot) calc(var(--k-wait) * 100%), transparent); border-color: var(--k-slot-s); border-style: dashed; }
+#il-leg .lg-ar.fw { border-color: var(--k-is-s); border-top-width: 3px; } #il-leg .lg-ar.pu { border-color: var(--k-war-s); border-top-width: 3px; }
+
+/* System overview upgrade (v16): module cards, colourful floorplan, latency bar, KPI tiles */
+.overview {
+  --o-blue: #2563EB; --o-teal: #0D9488; --o-green: #059669; --o-amber: #D97706; --o-rose: #E11D48; --o-orange: #EA580C;
+  --o-violet: #7C3AED; --o-cyan: #0891B2; --o-slate: #64748B; --o-fill: .16; --o-txt: var(--ink);
+}
+:root:not([data-theme="light"]) .overview, :root[data-theme="dark"] .overview {
+  --o-blue: #5B9BFF; --o-teal: #2DD4BF; --o-green: #34D399; --o-amber: #FBBF24; --o-rose: #FB7185; --o-orange: #FB923C;
+  --o-violet: #A78BFA; --o-cyan: #22D3EE; --o-slate: #94A3B8; --o-fill: .22; --o-txt: #F4F8FF;
+}
+.overview .hero-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 20px 28px; align-items: stretch; }
+.overview .hero-txt { display: flex; flex-direction: column; gap: 14px; }
+.overview .hero-txt .sub { font-size: 15px; line-height: 1.5; margin: 0; }
+.overview .hero-chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0; }
+.overview .hero-chips button {
+  all: unset; box-sizing: border-box; cursor: pointer; position: relative; display: flex; flex-direction: column; gap: 3px;
+  padding: 11px 12px 11px 16px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--cc) 38%, var(--rule));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--cc) calc(var(--o-fill) * 100%), var(--surface)) 0%, var(--surface-2) 70%);
+  overflow: hidden; transition: transform .18s var(--ease-out, ease), border-color .18s, box-shadow .18s;
+}
+.overview .hero-chips button::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--cc); }
+.overview .hero-chips button b { font: 700 14px var(--font-body); color: var(--ink); }
+.overview .hero-chips button span { font: 400 12px/1.35 var(--font-body); color: var(--ink-2); }
+.overview .hero-chips button i { font: 600 11px var(--font-mono); font-style: normal; color: var(--cc); margin-top: 3px; letter-spacing: .02em; }
+.overview .hero-chips button:hover, .overview .hero-chips button:focus-visible { transform: translateY(-2px); border-color: var(--cc); box-shadow: 0 6px 18px color-mix(in srgb, var(--cc) 28%, transparent); }
+.overview .hero-chips .c-cache { --cc: var(--o-blue); } .overview .hero-chips .c-pipe { --cc: var(--o-green); } .overview .hero-chips .c-ilp { --cc: var(--o-amber); }
+.overview .hero-chips .c-sys { --cc: var(--o-violet); } .overview .hero-chips .c-coh { --cc: var(--o-rose); } .overview .hero-chips .c-cl { --cc: var(--o-cyan); }
+/* floorplan */
+.overview .hero-viz { border-radius: 12px; padding: 14px 16px 12px; background: linear-gradient(160deg, var(--surface-2), var(--surface)); }
+.overview .fp rect { stroke-width: 1.8; }
+.overview .fp text { fill: var(--o-txt); } .overview .fp .t1 { font-weight: 800; }
+.overview .fp.s0 rect { fill: var(--o-blue);   fill-opacity: calc(var(--o-fill) * 1.8); stroke: var(--o-blue); }
+.overview .fp.s1 rect { fill: var(--o-teal);   fill-opacity: calc(var(--o-fill) * 1.8); stroke: var(--o-teal); }
+.overview .fp.s2 rect { fill: var(--o-green);  fill-opacity: calc(var(--o-fill) * 1.8); stroke: var(--o-green); }
+.overview .fp.s3 rect { fill: var(--o-amber);  fill-opacity: calc(var(--o-fill) * 1.8); stroke: var(--o-amber); }
+.overview .fp.s4 rect { fill: var(--o-rose);   fill-opacity: calc(var(--o-fill) * 1.8); stroke: var(--o-rose); }
+.overview .fp.c1 rect { fill: var(--o-orange); fill-opacity: calc(var(--o-fill) * 1.8); stroke: var(--o-orange); }
+.overview .fp.c2 rect { fill: var(--o-green);  fill-opacity: calc(var(--o-fill) * 1.2); stroke: var(--o-green); }
+.overview .fp.mm rect { fill: var(--o-slate);  fill-opacity: calc(var(--o-fill) * 1.2); stroke: var(--o-slate); stroke-dasharray: 5 3; }
+.overview .fp.co rect { fill: var(--o-rose);   fill-opacity: calc(var(--o-fill) * 1.2); stroke: var(--o-rose); }
+.overview .fp.ilp rect { fill: var(--o-amber); fill-opacity: calc(var(--o-fill) * 1.2); stroke: var(--o-amber); }
+.overview .fp:hover rect, .overview .fp:focus-visible rect { stroke-width: 2.6; filter: brightness(1.12); }
+.overview .fp.lit rect { fill: var(--o-blue) !important; fill-opacity: .55 !important; stroke: var(--o-blue) !important; stroke-width: 2.8; filter: drop-shadow(0 0 7px var(--o-blue)); }
+.overview .fp.lit.mm rect { fill: var(--o-slate) !important; stroke: var(--o-slate) !important; filter: drop-shadow(0 0 7px var(--o-slate)); }
+.overview .fp-a { stroke: var(--ink-2); stroke-width: 1.8; opacity: .6; }
+.overview .fp-a.lit { stroke: var(--o-blue); stroke-width: 3.4; opacity: 1; filter: drop-shadow(0 0 4px var(--o-blue)); }
+.overview .fp-cap { fill: var(--ink-2); }
+/* latency bar */
+.fp-bar { display: flex; gap: 4px; margin: 4px 0 8px; height: 26px; }
+.fp-bar span { display: flex; align-items: center; justify-content: center; gap: 5px; border-radius: 6px; font: 600 11px var(--font-mono); color: var(--ink-2); border: 1.5px dashed var(--rule); background: transparent; transition: background .3s, border-color .3s, color .3s; min-width: 0; white-space: nowrap; overflow: hidden; }
+.fp-bar span b { color: inherit; font-weight: 800; }
+.fp-bar .b1 { flex: 1.1 1 0; } .fp-bar .b2 { flex: 1.5 1 0; } .fp-bar .b3 { flex: 3 1 0; }
+.fp-bar .b1.on { background: color-mix(in srgb, var(--o-orange) 30%, transparent); border: 1.5px solid var(--o-orange); color: var(--ink); }
+.fp-bar .b2.on { background: color-mix(in srgb, var(--o-green) 30%, transparent); border: 1.5px solid var(--o-green); color: var(--ink); }
+.fp-bar .b3.on { background: color-mix(in srgb, var(--o-slate) 34%, transparent); border: 1.5px solid var(--o-slate); color: var(--ink); }
+/* KPI tiles */
+.overview .fp-live { display: block; margin-top: 4px; }
+.overview .fp-live > .fp-k { display: block; margin-bottom: 6px; }
+.fp-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.fp-kpis .kp { display: flex; flex-direction: column; gap: 1px; padding: 9px 11px; border-radius: 10px; border: 1px solid var(--rule); background: var(--surface); position: relative; overflow: hidden; font: 500 12px var(--font-body); color: var(--ink-2); }
+.fp-kpis .kp::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--kc, var(--accent)); }
+.fp-kpis .k1 { --kc: var(--o-green); } .fp-kpis .k2 { --kc: var(--o-blue); } .fp-kpis .k3 { --kc: var(--o-amber); }
+.fp-kpis em { font-style: normal; font: 600 10.5px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.fp-kpis .kp b { font: 800 24px/1.1 var(--font-mono); color: var(--kc); }
+.fp-kpis small { font: 400 11px/1.3 var(--font-body); color: var(--ink-3); }
+@media (max-width: 820px) { .overview .hero-in { grid-template-columns: 1fr; } .overview .hero-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .overview .hero-chips, .fp-kpis { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: no-preference) { .overview .hero-chips button { animation: none; } .fp-kpis .kp { animation: panelIn .45s var(--ease-out, ease) both; } .fp-kpis .k2 { animation-delay: .08s; } .fp-kpis .k3 { animation-delay: .16s; } }
+.overview .hero-chips button span { background: none; border: 0; padding: 0; border-radius: 0; }
+@media (prefers-reduced-motion: no-preference) { .fp-kpis .kp { animation: al-rise .45s var(--ease-out, ease) both; } }
+
+/* overview polish (v17): richer block fills, bigger floorplan text, cleaner tiles */
+:root:not([data-theme="light"]) .overview .fp.s0 rect { fill: #2563EB; fill-opacity: .72; stroke: #7FB0FF; }
+:root:not([data-theme="light"]) .overview .fp.s1 rect { fill: #0D9488; fill-opacity: .72; stroke: #5EEAD4; }
+:root:not([data-theme="light"]) .overview .fp.s2 rect { fill: #059669; fill-opacity: .72; stroke: #6EE7B7; }
+:root:not([data-theme="light"]) .overview .fp.s3 rect { fill: #D97706; fill-opacity: .72; stroke: #FCD34D; }
+:root:not([data-theme="light"]) .overview .fp.s4 rect { fill: #E11D48; fill-opacity: .70; stroke: #FDA4AF; }
+:root:not([data-theme="light"]) .overview .fp.c1 rect { fill: #EA580C; fill-opacity: .72; stroke: #FDBA74; }
+:root:not([data-theme="light"]) .overview .fp.c2 rect { fill: #059669; fill-opacity: .60; stroke: #6EE7B7; }
+:root:not([data-theme="light"]) .overview .fp.mm rect { fill: #475569; fill-opacity: .75; stroke: #CBD5E1; }
+:root:not([data-theme="light"]) .overview .fp.co rect { fill: #7C3AED; fill-opacity: .70; stroke: #C4B5FD; }
+:root:not([data-theme="light"]) .overview .fp.ilp rect { fill: #0891B2; fill-opacity: .70; stroke: #67E8F9; }
+:root:not([data-theme="light"]) .overview .fp.lit rect { fill-opacity: .95 !important; filter: drop-shadow(0 0 8px #7FB0FF); }
+.overview .fp .t1 { font-size: 13px; } .overview .fp .t2 { font-size: 10.5px; font-weight: 600; }
+.overview .fp-cap { font-size: 9.5px; }
+.overview .fp rect { stroke-width: 2; }
+.fp-bar { height: 32px; gap: 6px; margin: 6px 0 12px; }
+.fp-bar span { font-size: 12.5px; border-radius: 8px; }
+.fp-kpis { gap: 10px; }
+.fp-kpis .kp { padding: 12px 14px; border-radius: 12px; gap: 2px; border: 1px solid color-mix(in srgb, var(--kc) 45%, var(--rule)); background: linear-gradient(145deg, color-mix(in srgb, var(--kc) 16%, var(--surface)), var(--surface) 75%); }
+.fp-kpis .kp::before { display: none; }
+.fp-kpis em { font-size: 10.5px; letter-spacing: .05em; }
+.fp-kpis .kp b { font-size: 28px; }
+.fp-kpis small { font-size: 12px; }
+.overview .fp-live > .fp-k, .overview .fp-ctl .fp-k { font-size: 11.5px; }
+.fp-read { font-size: 15px; padding: 9px 12px; }
+:root:not([data-theme="light"]) .overview .fp.lit rect { fill: #1D4ED8 !important; fill-opacity: 1 !important; stroke: #9CC4FF !important; }
+:root:not([data-theme="light"]) .overview .fp.lit.mm rect { fill: #475569 !important; stroke: #E2E8F0 !important; filter: drop-shadow(0 0 8px #CBD5E1); }
+.overview .fp.lit.mm rect { fill: #475569 !important; }
+:root[data-theme="light"] .overview .fp.lit rect { fill: #2563EB !important; fill-opacity: 1 !important; stroke: #1E40AF !important; }
+:root[data-theme="light"] .overview .fp.lit text { fill: #fff; }
+
 </style>
 <div class="wrap">
   <header class="appbar">
     <div class="brand"><svg class="logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx=".8"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg><h1>ArchLab</h1><span class="proj"><b>VIT Vellore</b> · processor design workbench</span></div>
-    <div class="bar-r"><p class="hero-chk run" id="hero-chk"><i></i>running self-checks…</p><button type="button" class="theme" id="theme" aria-label="Switch colour theme" title="Switch colour theme"></button></div>
+    <div class="bar-r"><button type="button" class="theme" id="theme" aria-label="Switch colour theme" title="Switch colour theme"></button></div>
   </header>
   <details class="overview" id="overview"><summary><span>System overview</span><em>Select a block to open its tab</em></summary>
     <div class="hero-in">
       <div class="hero-txt"><p class="sub">Cache designs, pipelines, parallelism and coherence, simulated cycle by cycle in your browser. Every result is checked against an independent reference model.</p>
-        <div class="hero-chips"><button type="button" data-go="workbench">cache</button><button type="button" data-go="hz">pipeline</button><button type="button" data-go="ilp">ILP</button><button type="button" data-go="sys">whole processor</button><button type="button" data-go="coh">coherence</button><button type="button" data-go="cl">clusters</button></div></div>
+        <div class="hero-chips"><button type="button" data-go="workbench" class="c-cache"><b>Cache</b><span>Mapping, replacement and miss types</span><i aria-hidden="true">Open →</i></button><button type="button" data-go="hz" class="c-pipe"><b>Pipeline hazards</b><span>RAW stalls, forwarding, flushes</span><i aria-hidden="true">Open →</i></button><button type="button" data-go="ilp" class="c-ilp"><b>Parallelism</b><span>Issue width, renaming, out of order</span><i aria-hidden="true">Open →</i></button><button type="button" data-go="sys" class="c-sys"><b>Whole processor</b><span>CPI and run time, end to end</span><i aria-hidden="true">Open →</i></button><button type="button" data-go="coh" class="c-coh"><b>Coherence</b><span>MSI, MESI and MOESI bus traffic</span><i aria-hidden="true">Open →</i></button><button type="button" data-go="cl" class="c-cl"><b>Clusters</b><span>Amdahl speedup, node availability</span><i aria-hidden="true">Open →</i></button></div></div>
       <div class="hero-viz" id="hero-viz"></div>
     </div>
   </details>
   <nav class="tabs" role="tablist" aria-label="Topics"></nav>
   <main id="main"></main>
-  <footer class="foot"><span>ArchLab · VIT Vellore project: Simulation-Based Architectural Exploration and Performance Evaluation of a 5-Stage RISC-V Processor with Configurable Cache Hierarchy and Cache Controller RTL Implementation</span><span>no data leaves your browser</span></footer>
 </div>
 <script>
 /* ArchLab engines — BAEVD202 Computer Architecture
@@ -4835,7 +5024,8 @@ endmodule`;
     host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="group" aria-label="Block diagram of the modelled machine: pipeline, L1 caches, L2, memory, coherence, superscalar issue">${g}</svg>
       <div class="fp-ctl"><span class="fp-k">Send a load</span><div class="seg" role="group" aria-label="Where the load is found"><button type="button" data-m="0" aria-pressed="true">L1 hit</button><button type="button" data-m="1" aria-pressed="false">L1 miss, L2 hit</button><button type="button" data-m="2" aria-pressed="false">Miss to memory</button></div></div>
       <div class="fp-read" id="fp-read" aria-live="polite"></div>
-      <div class="fp-live" id="fp-live"><span class="fp-k">Live demo</span><span id="fp-n">computing…</span></div>`;
+      <div class="fp-bar" id="fp-bar" aria-hidden="true"><span class="b1"><b>1</b> D-cache</span><span class="b2"><b>10</b> L2</span><span class="b3"><b>100</b> memory</span></div>
+      <div class="fp-live" id="fp-live"><span class="fp-k">Live demo</span><div class="fp-kpis" id="fp-n"><span class="kp">computing…</span></div></div>`;
     // the load animation: lights the path the request takes and adds up the latency (AMAT building blocks)
     const T = [['D-cache', 1], ['L2', 10], ['memory', 100]], reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let mode = 0, auto = true, tm = [], loop = null;
@@ -4847,6 +5037,7 @@ endmodule`;
       const parts = T.slice(0, m + 1), sum = parts.reduce((a, b) => a + b[1], 0);
       const text = (k) => { const sh = parts.slice(0, k); return sh.length ? `${sh.map((x, i) => (i ? ' + ' : '') + `<b>${x[1]}</b> <i>${x[0]}</i>`).join('')}${k === parts.length ? ` = <b class="tot">${sum} cycle${sum > 1 ? "s" : ""}</b>` : ''}` : 'load issued in MEM…'; };
       const R = $('#fp-read', host); R.innerHTML = reduce ? text(parts.length) : text(0);
+      host.querySelectorAll('#fp-bar span').forEach((s, i) => s.classList.toggle('on', i <= m));
       seq.forEach((sel, k) => { const run = () => { sel.forEach((c) => q(c).forEach((n) => n.classList.add('lit'))); R.innerHTML = text(Math.min(k, parts.length)); if (k + 1 === seq.length) R.innerHTML = text(parts.length); }; if (reduce) run(); else tm.push(setTimeout(run, 350 + k * 650)); });
       if (reduce) seq.forEach((sel) => sel.forEach((c) => q(c).forEach((n) => n.classList.add('lit'))));
     }
@@ -4862,14 +5053,11 @@ endmodule`;
         const o = PS.simulate(PEX.mixed.prog, Object.assign({}, PS.DEFAULTS, { init: PEX.mixed.init, max: 100 })).metrics;
         const addrs = L.buildWorkload('matmul', { n: 32 }), st = L.simulate(addrs, { l1Bytes: 8192, line: 32, ways: 2, policy: 'LRU', l2Bytes: 262144, l2Ways: 8, write: 'back' });
         const t1 = 1, t2 = 10, tm = 100, amat = (st.l1 * t1 + st.v * t1 + st.l2 * (t1 + t2) + st.mem * (t1 + t2 + tm)) / st.accesses;
-        $('#fp-n', host).innerHTML = `pipeline CPI <b>${fmt(o.cpi, 2)}</b> · L1 hit rate <b>${pct(st.hitRate, 1)}</b> · avg memory access <b>${fmt(amat, 2)}</b> cycles`;
+        $('#fp-n', host).innerHTML = `<div class="kp k1" title="5-stage pipeline, mixed-latency demo program"><em>Pipeline CPI</em><b>${fmt(o.cpi, 2)}</b><small>demo program</small></div><div class="kp k2" title="matrix multiply 32×32 on an 8 KB 2-way L1 with a 256 KB L2"><em>L1 hit rate</em><b>${pct(st.hitRate, 1)}</b><small>matmul 32×32</small></div><div class="kp k3" title="AMAT with L1 1, L2 10 and memory 100 cycles"><em>Avg memory access</em><b>${fmt(amat, 2)}</b><small>cycles per access</small></div>`;
       } catch (err) { $('#fp-n', host).textContent = 'every block is a simulator: click one'; }
     }, 300);
     // clickable topic chips jump to the tab
     document.querySelectorAll('.hero-chips [data-go]').forEach((b) => b.addEventListener('click', () => { const t = $('#tab-' + b.dataset.go); if (t) { t.click(); t.scrollIntoView({ block: 'nearest', inline: 'center' }); window.scrollTo({ top: nav.getBoundingClientRect().top + scrollY - 8, behavior: 'smooth' }); } }));
-    // live proof: run the built-in self-checks once the page is idle
-    const chk = $('#hero-chk');
-    if (chk && TESTS) setTimeout(() => { try { const t0 = performance.now(), res = TESTS.run(), bad = res.filter((r) => !r.pass).length; chk.className = 'hero-chk ' + (bad ? 'fail' : 'pass'); chk.innerHTML = `<i></i><b>${res.length - bad}/${res.length}</b><em>self-checks pass</em><span>ran in your browser, ${Math.round(performance.now() - t0)} ms</span>`; } catch (e) { chk.textContent = 'self-checks unavailable'; } }, 700);
   })();
 })();
 
